@@ -2,7 +2,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:event_planner/core/utils/debug_logger.dart';
 import 'package:event_planner/core/utils/is_list_exist.dart';
 import 'package:event_planner/data/data_utility/data_utility.dart';
-import 'package:event_planner/domain/entities/models/event_model.dart';
+import 'package:event_planner/domain/entities/models/event/event_model.dart';
 import 'package:event_planner/domain/repositories/home_repo/home_repo.dart';
 
 import '../../rest_client/dio_base.dart';

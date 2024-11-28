@@ -1,7 +1,7 @@
 import 'package:event_planner/config/routes/routes.dart';
 import 'package:event_planner/core/utils/utils.dart';
 import 'package:event_planner/data/data_utility/data_utility.dart';
-import 'package:event_planner/domain/entities/models/event_model.dart';
+import 'package:event_planner/domain/entities/models/event/event_model.dart';
 import 'package:event_planner/presentation/common_widgets/common_widgets.dart';
 import 'package:event_planner/presentation/features/home/controller/home_screen_controller.dart';
 import 'package:event_planner/presentation/features/set_event/controller/set_event_controller.dart';

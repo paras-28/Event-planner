@@ -1,6 +1,6 @@
 import 'package:event_planner/config/routes/routes.dart';
 import 'package:event_planner/core/utils/utils.dart';
-import 'package:event_planner/domain/entities/models/event_model.dart';
+import 'package:event_planner/domain/entities/models/event/event_model.dart';
 import 'package:event_planner/presentation/common_widgets/common_widgets.dart';
 import 'package:event_planner/presentation/features/set_event/controller/set_event_controller.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +35,12 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
       {
         _textEditingControllerTitle.text = widget.eventModelParam?.title ?? '';
         _textEditingControllerDescription.text = widget.eventModelParam?.description ?? '';
-        _textEditingControllerDateTime.text = DateFormatters.fullDateFormat.format(DateTime.parse(widget.eventModelParam?.createdAt ?? ''));
-        selectedDate = DateTime.parse(widget.eventModelParam?.createdAt ?? '');
+
+        DateTime? getDateTime = DateTime.tryParse(widget.eventModelParam?.createdAt ?? '');
+        if (getDateTime != null) {
+          _textEditingControllerDateTime.text = DateFormatters.fullDateFormat.format(getDateTime);
+          selectedDate = getDateTime;
+        }
       }
 
     selectedDate = DateTime.now();

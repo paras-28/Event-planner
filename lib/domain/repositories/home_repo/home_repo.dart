@@ -1,4 +1,4 @@
-import 'package:event_planner/domain/entities/models/event_model.dart';
+import 'package:event_planner/domain/entities/models/event/event_model.dart';
 
 abstract class HomeRepo
 {

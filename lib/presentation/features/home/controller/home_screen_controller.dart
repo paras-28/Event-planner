@@ -1,6 +1,6 @@
 import 'package:event_planner/config/global_providers/dio_provider.dart';
 import 'package:event_planner/core/utils/app_strings.dart';
-import 'package:event_planner/domain/entities/models/event_model.dart';
+import 'package:event_planner/domain/entities/models/event/event_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
