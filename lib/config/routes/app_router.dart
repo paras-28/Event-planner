@@ -31,11 +31,18 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: '/add-event',
-        name: AppRoutesName.addEventScreen,
-        pageBuilder: (context, state) => const NoTransitionPage(
-          child: SetEventScreen(),
-        ),
+        path: '/set-event',
+        name: AppRoutesName.setEventScreen,
+        pageBuilder: (context, state)
+        {
+          Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+
+         return NoTransitionPage(
+            child: SetEventScreen(
+              eventModelParam: extra["event"],
+            ),
+          );
+        },
         // redirect: RedirectUtil.redirect,
       ),
 

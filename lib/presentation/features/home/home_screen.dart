@@ -24,11 +24,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance
-    //     .addPostFrameCallback((_)
-    // {
-    //   ref.read(homeControllerProvider.notifier).getData();
-    // });
   }
 
   @override
@@ -39,7 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: (){
 
-        context.goNamed(AppRoutesName.addEventScreen);
+        context.goNamed(AppRoutesName.setEventScreen);
       },
         child: const Icon(Icons.add,
         size: 22,
@@ -63,8 +58,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                      Container(
                         color: Colors.black12,
                         child: IconButton(
-                          icon: const Icon(Icons.more_horiz),
-                          onPressed: () {},
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            context.goNamed(AppRoutesName.setEventScreen,
+                            extra: {
+                              "event" : eventModel
+                             });
+                          },
                         ),
                       ),
                       Container(

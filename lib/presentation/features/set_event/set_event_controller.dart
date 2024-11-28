@@ -31,5 +31,20 @@ class SetEventNotifier extends AutoDisposeAsyncNotifier<EventModel?> {
     }
 
   }
+  Future<void> updateEvent(EventModel reqModel) async {
+    try {
+      state = const AsyncValue.loading();
+      // EventModel productResModel =
+      EventModel eventModel =
+          await ref.read(homeRepoProvider).updateEvent(model: reqModel);
+
+      state =  AsyncValue.data(eventModel);
+      ref.invalidate(homepageProvider);
+      //
+    }  catch (e, s) {
+      state =  AsyncValue.error(e, s);
+    }
+
+  }
 
 }

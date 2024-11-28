@@ -97,9 +97,26 @@ class HomeRepoImpl implements HomeRepo
   }
 
   @override
-  Future<EventModel> updateEvent({required EventModel model}) {
+  Future<EventModel> updateEvent({required EventModel model}) async {
+    try {
 
-    throw UnimplementedError();
+      debuggerAdvance(tag: 'Api is calling', value: 'updateEvent');
+      var response = await DioClient(dioInst)
+          .put(url: '${ApiEndPoints.event}/${model.id}', uniqueKey: "updateEvent",
+        data: model.toJson(),
+      );
+
+      debuggerAdvance(tag: "updateEvent ", value:  response.data.toString() );
+      // Map<String, dynamic>? res = response.data as Map<String, dynamic>?;
+      return  EventModel.fromJson(response.data);
+    } on dio.DioException catch (e) {
+
+      throw DioExceptions.fromDioError(
+          dioError: e, errorFrom: "updateEvent")
+          .errorMessage();
+    } catch (e) {
+      rethrow;
+    }
   }
 
 }

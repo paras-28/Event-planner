@@ -21,7 +21,8 @@ import 'package:go_router/go_router.dart';
 
 
 class SetEventScreen extends ConsumerStatefulWidget {
-  const SetEventScreen({super.key});
+  final EventModel? eventModelParam;
+  const SetEventScreen({super.key , required this.eventModelParam});
 
   @override
   ConsumerState createState() => _SetEventScreenState();
@@ -42,6 +43,15 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
     _textEditingControllerTitle = TextEditingController();
     _textEditingControllerDescription = TextEditingController();
     _textEditingControllerDateTime = TextEditingController();
+
+    if(widget.eventModelParam != null)
+      {
+        _textEditingControllerTitle.text = widget.eventModelParam?.title ?? '';
+        _textEditingControllerDescription.text = widget.eventModelParam?.description ?? '';
+        _textEditingControllerDateTime.text = DateFormatters.formatterMMMMDDYYYY.format(DateTime.parse(widget.eventModelParam?.createdAt ?? ''));
+        selectedDate = DateTime.parse(widget.eventModelParam?.createdAt ?? '');
+      }
+
     selectedDate = DateTime.now();
   }
 
@@ -79,7 +89,6 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
       if(prev != next && next.valueOrNull != null )
       {
         context.goNamed(AppRoutesName.homeScreen);
-
       }
     });
 
@@ -87,7 +96,9 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: CustomAppbar(
-        title: AppStrings.addEvent,
+        title: widget.eventModelParam != null ?
+        AppStrings.updateEvent :
+        AppStrings.addEvent,
         onBackPressed: () {
           context.goNamed(AppRoutesName.homeScreen);
         },
@@ -162,10 +173,23 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
                               title: AppStrings.save,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  EventModel eventModel = EventModel(createdAt: selectedDate.toIso8601String(),
-                                    title: _textEditingControllerTitle.text,
-                                    description: _textEditingControllerDescription.text, );
-                                  ref.read(setEventProvider.notifier).addEvent(eventModel);
+                                  // If event already exist then we update that event
+                                  if (widget.eventModelParam != null) {
+                                    EventModel eventModel = EventModel(createdAt: selectedDate.toIso8601String(),
+                                      title: _textEditingControllerTitle.text,
+                                      description: _textEditingControllerDescription.text,
+                                    id: widget.eventModelParam?.id??'');
+                                    ref.read(setEventProvider.notifier).updateEvent(eventModel);
+                                  }
+                                  else{
+                                    EventModel eventModel = EventModel(
+                                        createdAt: selectedDate.toIso8601String(),
+                                      title: _textEditingControllerTitle.text,
+                                      description: _textEditingControllerDescription.text,
+                                    );
+                                    ref.read(setEventProvider.notifier).addEvent(eventModel);
+                                  }
+
                                 }
                               });
 
