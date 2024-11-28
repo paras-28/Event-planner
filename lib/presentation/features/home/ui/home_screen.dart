@@ -4,6 +4,7 @@ import 'package:event_planner/data/data_utility/data_utility.dart';
 import 'package:event_planner/domain/entities/models/event_model.dart';
 import 'package:event_planner/presentation/common_widgets/common_widgets.dart';
 import 'package:event_planner/presentation/features/home/controller/home_screen_controller.dart';
+import 'package:event_planner/presentation/features/set_event/controller/set_event_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +27,42 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final homePageStateNotifier = ref.watch(homepageProvider);
+
+    ref.listen<AsyncValue<String?>>(deleteEventProvider, ( prev, next) {
+
+      if(prev != next  && next.hasError)
+      {
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return InfoDialogViewGet(message: next.error.toString() ,
+              onPressed: ()
+              {
+                Navigator.of(context).pop();
+              },
+
+            );
+          },
+        );
+      }
+
+      if(prev != next && next.valueOrNull != null )
+      {
+        final scaffold = ScaffoldMessenger.of(context);
+        scaffold.showSnackBar(
+          const SnackBar(
+            content: TextView(title:  AppStrings.deleteSuccessfully,
+              textColor:  Colors.white, alignment: Alignment.center,),
+            duration: Duration(seconds: 2),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: AppColors.primaryColor,
+            margin: EdgeInsets.all(20),
+            shape: StadiumBorder(),
+          ),
+        );
+      }
+    });
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: (){
@@ -84,7 +121,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                      trailing: IconButton(
                                 onPressed: () {
                                   ref
-                                      .read(homepageProvider.notifier)
+                                      .read(deleteEventProvider.notifier)
                                       .deleteEvent(eventModel.id.toString());
                                 },
                                 icon: const Icon(

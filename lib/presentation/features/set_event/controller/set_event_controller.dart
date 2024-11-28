@@ -1,6 +1,7 @@
 
 import 'package:event_planner/config/global_providers/dio_provider.dart';
 import 'package:event_planner/core/utils/debug_logger.dart';
+import 'package:event_planner/core/utils/utils.dart';
 import 'package:event_planner/domain/entities/models/event_model.dart';
 import 'package:event_planner/presentation/features/home/controller/home_screen_controller.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -48,3 +49,4 @@ class SetEventNotifier extends AutoDisposeAsyncNotifier<EventModel?> {
   }
 
 }
+

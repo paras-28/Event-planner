@@ -9,5 +9,6 @@ class AppStrings
  static const String eventDate = "Event Date";
  static const String save = "Save";
  static const String eventy = "Eventy";
+ static const String deleteSuccessfully = "Delete Successfully";
 }
 
