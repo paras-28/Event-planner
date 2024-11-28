@@ -1,4 +1,5 @@
 import 'package:event_planner/config/test_config/test_config.dart';
+import 'package:event_planner/data/data_utility/api_end_points.dart';
 import 'package:event_planner/data/local_storage/repositories/home_repo/home_repo_local_impl.dart';
 import 'package:event_planner/data/repositories/home_repo/home_repo_impl.dart';
 import 'package:event_planner/domain/repositories/home_repo/home_repo.dart';
@@ -28,37 +29,33 @@ dio.Dio  dioObjectRecogniser(TestConfig? config)
   {
     /// For testing purpose
     final  dioTestObject = dio.Dio(dio.BaseOptions(
-      baseUrl: "https://api.restful-api.dev",
+      baseUrl: "https://67484d675801f51535903e81.mockapi.io/paras",
     ));
     final dioTestAdapter = DioAdapter(dio: dioTestObject);
 
     dioTestAdapter.onGet(
-      "/objects",
+      ApiEndPoints.event,
           (server) => server.reply(
         200,
         [
           {
-            "id": "1",
-            "name": "Google Pixel 6 Pro",
-            "data": {
-              "color": "Cloudy White",
-              "capacity": "128 GB"
-            }
+            "created_at": "created_at 1",
+            "title": "title 1",
+            "description": "description 1",
+            "id": "1"
           },
           {
-            "id": "2",
-            "name": "Apple iPhone 12 Mini, 256GB, Blue",
-            "data": null
+            "created_at": "2024-11-30T03:25:00.000",
+            "title": "title 2",
+            "description": "description 2vg\n",
+            "id": "2"
           },
           {
-            "id": "3",
-            "name": "Apple iPhone 12 Pro Max",
-            "data": {
-              "color": "Cloudy White",
-              "capacity GB": 512
-            }
+            "created_at": "created_at 3",
+            "title": "title 3",
+            "description": "description 3",
+            "id": "3"
           },
-
         ],
         // Reply would wait for one-sec before returning data.
         delay: const Duration(seconds: 1),
@@ -70,17 +67,17 @@ dio.Dio  dioObjectRecogniser(TestConfig? config)
   {
     /// For testing purpose
     final  dioTestObject = dio.Dio(dio.BaseOptions(
-      baseUrl: "https://api.restful-api.dev",
+      baseUrl: "https://67484d675801f51535903e81.mockapi.io/paras",
     ));
     final dioTestAdapter = DioAdapter(dio: dioTestObject);
 
     dioTestAdapter.onGet(
-      "/objects",
+      ApiEndPoints.event,
           (server) => server.reply(
-        500,
+        400,
         {
-          "status" : 500,
-          "message" :"Internal server error"
+          "status" : 400,
+          "message" :"Bad request"
         },
         // Reply would wait for one-sec before returning data.
         delay: const Duration(seconds: 1),

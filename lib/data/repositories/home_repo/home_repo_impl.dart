@@ -22,11 +22,9 @@ class HomeRepoImpl implements HomeRepo
           data: model.toJson(),
       );
 
-
       debuggerAdvance(tag: "add event ", value:  response.data.toString() );
 
       // Map<String, dynamic>? res = response.data as Map<String, dynamic>?;
-
        return  EventModel.fromJson(response.data);
     } on dio.DioException catch (e) {
 
