@@ -1,6 +1,7 @@
 import 'package:event_planner/config/routes/app_routes_name.dart';
 import 'package:event_planner/core/utils/app_strings.dart';
 import 'package:event_planner/data/data_utility/data_utility.dart';
+import 'package:event_planner/domain/entities/models/event_model.dart';
 import 'package:event_planner/presentation/common_widgets/custom_appbar.dart';
 import 'package:event_planner/presentation/common_widgets/custom_loader.dart';
 import 'package:event_planner/presentation/common_widgets/error_view.dart';
@@ -50,16 +51,41 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: Center(
         child: homePageStateNotifier.when(
-            data: (final valueOrNull) =>valueOrNull == null ? const ErrorView(
+            data: (final valueOrNull) => valueOrNull.isEmpty ? const ErrorView(
               message: ExceptionStrings.noDataAvailable,
             ) :  ListView.builder(
                 itemCount: homePageStateNotifier.valueOrNull?.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    leading: Text((index + 1).toString(),
-                       ),
-                    title: Text(
-                      homePageStateNotifier.valueOrNull![index].title ?? '',
+
+                  EventModel eventModel = homePageStateNotifier.valueOrNull![index];
+               return    SlideMenu(
+                    menuItems: <Widget>[
+                     Container(
+                        color: Colors.black12,
+                        child: IconButton(
+                          icon: const Icon(Icons.more_horiz),
+                          onPressed: () {},
+                        ),
+                      ),
+                      Container(
+                        color: Colors.red,
+                        child: IconButton(
+                          color: Colors.white,
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                                ref
+                                    .read(homepageProvider.notifier)
+                                    .deleteEvent(eventModel.id.toString());
+                              },
+                        ),
+                      ),
+                    ],
+                    child:  ListTile(
+                      leading: Text((index + 1).toString(),
+                      ),
+                      title: Text(
+                      eventModel.title ?? '',
+                      ),
                     ),
                   );
                 }),

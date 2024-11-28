@@ -16,6 +16,7 @@ class HomeRepoImpl implements HomeRepo
   @override
   Future<EventModel> addEvent({required EventModel model}) async {
     try {
+
       debuggerAdvance(tag: 'Api is calling', value: 'addEvent');
       var response = await DioClient(dioInst)
           .post(url: ApiEndPoints.event, uniqueKey: "addEvent",
@@ -39,10 +40,29 @@ class HomeRepoImpl implements HomeRepo
   }
 
   @override
-  Future<EventModel> deleteEvent({required String modelId}) {
-    // TODO: implement deleteEvent
-    throw UnimplementedError();
+  Future<EventModel> deleteEvent({required String eventID}) async {
+    try {
+
+      debuggerAdvance(tag: 'Api is calling', value: 'deleteEvent');
+       var response = await DioClient(dioInst)
+          .delete(url: '${ApiEndPoints.event}/$eventID', uniqueKey: "deleteEvent",
+
+      );
+      debuggerAdvance(tag: "deleteEvent ", value:  response.data.toString() );
+
+      // Map<String, dynamic>? res = response.data as Map<String, dynamic>?;
+
+      return  EventModel.fromJson(response.data);
+    } on dio.DioException catch (e) {
+
+      throw DioExceptions.fromDioError(
+          dioError: e, errorFrom: "deleteEvent")
+          .errorMessage();
+    } catch (e) {
+      rethrow;
+    }
   }
+
 
   @override
   Future<List<EventModel>> fetchAllEvents() async {
@@ -58,7 +78,7 @@ class HomeRepoImpl implements HomeRepo
         return List<EventModel>.from(
             list!.map((x) => EventModel.fromJson(x)));
       } else {
-        throw ExceptionStrings.someThingWentWrong;
+        return [];
       }
     } on dio.DioException catch (e) {
 

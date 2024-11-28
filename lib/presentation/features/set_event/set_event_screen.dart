@@ -63,7 +63,7 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
 
         showDialog(
           context: context,
-          barrierDismissible: false,
+          barrierDismissible: true,
           builder: (BuildContext context) {
             return InfoDialogViewGet(message: next.error.toString() ,
               onPressed: ()
