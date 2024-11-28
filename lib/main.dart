@@ -1,8 +1,25 @@
+import 'package:event_planner/config/global_providers/dio_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'config/test_config/test_config.dart';
+
+Future<void> main({
+  TestConfig?  testConfig
+}) async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  // final sharedPreferences = await SharedPreferences.getInstance();
+  runApp(ProviderScope(
+    overrides: [
+      dioProvider.overrideWithValue(dioObjectRecogniser(testConfig)),
+      // override the previous value with the new object
+      // sharedPreferencesProvider.overrideWithValue(sharedPreferences),
+    ],
+    child: const MyApp(),
+  ));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
