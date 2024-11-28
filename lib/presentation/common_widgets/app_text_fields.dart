@@ -9,42 +9,42 @@ import 'package:flutter/services.dart';
 
 
 class AppTextField extends StatefulWidget {
-   String? hint;
-   String? headingText;
+  final  String? hint;
+  final  String? headingText;
 
-  TextEditingController? controller;
-  final EdgeInsets margin;
-  AutovalidateMode autoValidateMode;
-  late FocusNode? focusNode;
-  List<String>? autoFills;
-  BuildContext context;
-  String? initialValue;
-  bool enable;
-  Function? validator;
-  bool readOnly;
-  Widget? suffixIcon;
-  Icon? prefixIcon;
-  double? width;
-  double? height;
-  double hintTextFontSize;
-  Color fillColor;
-  List<TextInputFormatter>? inputFormatter;
-  Function()? onTap;
-  int maxLimit;
-  Function(String) onChanged;
-  Function()? onEditing;
-  Function(String)? onSubmitted;
-  bool isPassword;
-  double borderRadius;
-  Color? borderColor;
-  TextInputType? keyboard;
-  TextStyle? textStyle;
-  int minLines;
-  int maxLines;
-  bool isMultilineField;
-  Color headingTextColor;
+  final TextEditingController? controller;
+  final  EdgeInsets margin;
+  final AutovalidateMode autoValidateMode;
+  final  FocusNode? focusNode;
+  final List<String>? autoFills;
+  final BuildContext context;
+  final String? initialValue;
+  final bool enable;
+  final Function? validator;
+  final bool readOnly;
+  final Widget? suffixIcon;
+  final Icon? prefixIcon;
+  final double? width;
+  final double? height;
+  final double hintTextFontSize;
+  final Color fillColor;
+  final List<TextInputFormatter>? inputFormatter;
+  final Function()? onTap;
+  final int maxLimit;
+  final Function(String) onChanged;
+  final Function()? onEditing;
+ final  Function(String)? onSubmitted;
+ final  bool isPassword;
+ final  double borderRadius;
+ final  Color? borderColor;
+ final  TextInputType? keyboard;
+ final  TextStyle? textStyle;
+ final  int minLines;
+ final  int maxLines;
+ final  bool isMultilineField;
+ final  Color headingTextColor;
 
-  AppTextField(
+ const  AppTextField(
       {super.key,
       this.controller,
       this.headingText,

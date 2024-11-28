@@ -11,12 +11,10 @@ Future<void> main({
 }) async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  // final sharedPreferences = await SharedPreferences.getInstance();
+
   runApp(ProviderScope(
     overrides: [
       dioProvider.overrideWithValue(dioObjectRecogniser(testConfig)),
-      // override the previous value with the new object
-      // sharedPreferencesProvider.overrideWithValue(sharedPreferences),
     ],
     child: const MyApp(),
   ));
@@ -27,13 +25,11 @@ Future<void> main({
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Responsive.size = MediaQuery.sizeOf(context);
-
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: 'Eventy',
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.routers,
       theme: ThemeData(

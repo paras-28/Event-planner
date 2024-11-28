@@ -11,10 +11,3 @@ class AppStrings
  static const String eventy = "Eventy";
 }
 
-
-
-class FirebaseStrings
-{
- static const String  usersCollection = "users";
- static const String  userIdKey = "user_id";
-}

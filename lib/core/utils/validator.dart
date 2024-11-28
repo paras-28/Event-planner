@@ -13,7 +13,7 @@ class Validator {
   // ignore: prefer_function_declarations_over_variables
   static Function validateList = (input) {
     if (input == null || input.length < 1) {
-      return "Please Select Something";
+      return "List is empty";
     } else {
       return null;
     }

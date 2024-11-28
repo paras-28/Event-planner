@@ -1,5 +1,5 @@
-import 'package:event_planner/presentation/features/home/home_screen.dart';
-import 'package:event_planner/presentation/features/set_event/set_event_screen.dart';
+import 'package:event_planner/presentation/features/home/ui/home_screen.dart';
+import 'package:event_planner/presentation/features/set_event/ui/set_event_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

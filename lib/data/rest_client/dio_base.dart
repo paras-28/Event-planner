@@ -29,7 +29,7 @@ class DioClient {
       this._dio
       )
   {
-    debuggerAdvance(tag: "Dio info", value:' ${_dio.options.baseUrl}' ?? '');
+    debuggerAdvance(tag: "Dio info", value:' ${_dio.options.baseUrl}' );
   }
 
   // Get:-----------------------------------------------------------------------
