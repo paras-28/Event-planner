@@ -59,7 +59,7 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
 
     ref.listen<AsyncValue<EventModel?>>(setEventProvider, ( prev, next) {
 
-      if(prev != next  && next.hasError)
+      if(prev != next  && next.hasError  && next.isLoading == false)
       {
 
         showDialog(
