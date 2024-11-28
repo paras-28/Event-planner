@@ -142,7 +142,7 @@ class _AppTextFieldState extends State<AppTextField> {
               onChanged: widget.onChanged,
               inputFormatters: widget.inputFormatter,
               maxLength: widget.maxLimit,
-              minLines: widget.minLines,
+              minLines: widget.isMultilineField ? null : widget.minLines,
               maxLines:   widget.maxLines,
               readOnly: widget.readOnly,
               focusNode: widget.focusNode,

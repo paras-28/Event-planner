@@ -31,7 +31,7 @@ bool isLastDateIsCurrentDay = true}
     },
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(currentSelectedState.year-100),
+      firstDate: DateTime.now(),
       lastDate: isLastDateIsCurrentDay ? currentSelectedState
           : DateTime(currentSelectedState.year+100),);
   if (picked != null && picked != selectedDate) {
