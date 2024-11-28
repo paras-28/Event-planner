@@ -1,4 +1,5 @@
 import 'package:event_planner/config/routes/app_routes_name.dart';
+import 'package:event_planner/core/utils/app_colors.dart';
 import 'package:event_planner/core/utils/app_strings.dart';
 import 'package:event_planner/core/utils/responsive_util.dart';
 import 'package:event_planner/core/utils/text_style_constants.dart';
@@ -31,7 +32,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // HomeScreenState  dashboardScreenStateNotifier = ref.watch(homeControllerProvider);
     final homePageStateNotifier = ref.watch(homepageProvider);
 
     return Scaffold(
@@ -39,8 +39,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
         context.goNamed(AppRoutesName.setEventScreen);
       },
+        backgroundColor: AppColors.primaryColor,
         child: const Icon(Icons.add,
         size: 22,
+          color: Colors.white,
         ),
       
       ),

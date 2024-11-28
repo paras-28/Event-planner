@@ -7,9 +7,6 @@ import 'package:dio/dio.dart' as dio;
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
 
-
-
-
 final dioProvider = Provider<dio.Dio>((ref) {
   throw UnimplementedError();
 });
