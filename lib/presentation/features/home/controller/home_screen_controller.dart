@@ -88,3 +88,53 @@ class HomeScreenState {
 
 
 }
+
+
+
+final homepageProvider = AsyncNotifierProvider.autoDispose<MyHomeNotifier, List<EventModel>>(MyHomeNotifier.new);
+
+class MyHomeNotifier extends AutoDisposeAsyncNotifier<List<EventModel>> {
+
+  @override
+  Future<List<EventModel>> build() async{
+    return await ref.read(homeRepoProvider).fetchAllEvents();
+  }
+
+
+  Future<void> addProduct(EventModel productResModel) async {
+    // await ref.read(homeRepoProvider).updateParticularProduct(productResModel);
+    ref.invalidateSelf();
+
+  }
+
+  Future<void> deleteEvent(EventModel productResModel) async {
+    // await ref.read(homeRepoProvider).updateParticularProduct(productResModel);
+    ref.invalidateSelf();
+
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+final addProductProvider = AsyncNotifierProvider.autoDispose< AddProductNotifier, EventModel?>(AddProductNotifier.new);
+
+class AddProductNotifier extends AutoDisposeAsyncNotifier<EventModel?> {
+
+  @override
+  Future<EventModel?> build() async {
+    return null;
+  }
+
+  Future<EventModel?> addProduct(EventModel reqModel) async {
+    try {
+      state = const AsyncValue.loading();
+      // EventModel productResModel =
+      // await ref.read(homeRepoProvider).updateParticularProduct(reqModel);
+      ref.invalidate(homepageProvider);
+      // state =  AsyncValue.data(productResModel);
+    }  catch (e, s) {
+      state =  AsyncValue.error(e, s);
+    }
+
+  }
+}
