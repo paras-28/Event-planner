@@ -17,12 +17,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-
-
-
 class SetEventScreen extends ConsumerStatefulWidget {
   final EventModel? eventModelParam;
-  const SetEventScreen({super.key , required this.eventModelParam});
+  const SetEventScreen({super.key ,  this.eventModelParam});
 
   @override
   ConsumerState createState() => _SetEventScreenState();

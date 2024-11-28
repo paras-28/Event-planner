@@ -35,13 +35,24 @@ class AppRouter {
         name: AppRoutesName.setEventScreen,
         pageBuilder: (context, state)
         {
-          Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
 
-         return NoTransitionPage(
-            child: SetEventScreen(
-              eventModelParam: extra["event"],
-            ),
-          );
+          if(state.extra !=null)
+            {
+              Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+
+              return NoTransitionPage(
+                child: SetEventScreen(
+                  eventModelParam: extra["event"],
+                ),
+              );
+            }
+          else
+            {
+              return const NoTransitionPage(
+                child: SetEventScreen(),
+              );
+            }
+
         },
         // redirect: RedirectUtil.redirect,
       ),
