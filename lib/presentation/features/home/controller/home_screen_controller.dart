@@ -22,14 +22,12 @@ class HomeScreenController extends StateNotifier<HomeScreenState> {
 
   getData() async {
     try {
-      state =
-          state.copyWith(showLoader: true ,hasMessage: '');
+      state = state.copyWith(showLoader: true ,hasMessage: '');
        List<EventModel> list  = await homeRepo.fetchAllEvents();
        debuggerAdvance(tag: "list length ", value: list.length);
-      // List<HomeResItemModel> res = await ref.getContentForHomeScreen();
-      // List<HomeResItemModel> res = await _repository.getContentForHomeScreen();
       state = state.copyWith(
         showLoader: false,
+        listOFEventModel: list
       );
     }
 
