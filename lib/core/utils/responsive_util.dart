@@ -32,6 +32,9 @@ class Responsive {
   static isSmallDevice() {
     return size.height < 675;
   }
+static isMobile() {
+    return size.width < 400;
+  }
 
   static printDimensions() {
     debuggerAdvance(tag: "Device Height", value: size.height);

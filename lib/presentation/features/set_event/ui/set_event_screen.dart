@@ -167,7 +167,7 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
                           final notifier = ref.watch(setEventProvider);
 
                           return notifier.isLoading ? const CustomLoader() : AppButton(
-                            width: Responsive.isSmallDevice() ? double.infinity : Responsive.setWidthByPercentage(30),
+                            width: Responsive.isMobile() ? double.infinity : Responsive.setWidthByPercentage(30),
                               title: AppStrings.save,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
