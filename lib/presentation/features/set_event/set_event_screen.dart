@@ -45,7 +45,7 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
       {
         _textEditingControllerTitle.text = widget.eventModelParam?.title ?? '';
         _textEditingControllerDescription.text = widget.eventModelParam?.description ?? '';
-        _textEditingControllerDateTime.text = DateFormatters.formatterMMMMDDYYYY.format(DateTime.parse(widget.eventModelParam?.createdAt ?? ''));
+        _textEditingControllerDateTime.text = DateFormatters.fullDateFormat.format(DateTime.parse(widget.eventModelParam?.createdAt ?? ''));
         selectedDate = DateTime.parse(widget.eventModelParam?.createdAt ?? '');
       }
 
@@ -130,16 +130,22 @@ class _SetEventScreenState extends ConsumerState<SetEventScreen> {
                           validator: Validator.validateEmpty,
                           onTap: () async {
 
-                            await appDatePicker(
-                                context: context,
-                                onDateSelect: (DateTime dateTime) {
-                                  selectedDate = dateTime;
-                                  _textEditingControllerDateTime.text = DateFormatters
-                                      .formatterddMMYYYY
-                                      .format(dateTime);
-                                },
-                                selectedDate: DateTime.now(),
-                                isLastDateIsCurrentDay: false);
+                        DateTime? datetime   = await  showDateTimePicker(
+                              context: context,
+                              firstDate:  DateTime.now(),
+                              initialDate: DateTime.now()
+
+                            );
+
+                        if(datetime != null)
+                          {
+                            selectedDate = datetime;
+                            _textEditingControllerDateTime.text = DateFormatters
+                                .fullDateFormat
+                                .format(datetime);
+                          }
+
+
                           },
                           headingText: AppStrings.eventDate,
                           margin: EdgeInsets.only(top: Responsive.setHeight(30)),
