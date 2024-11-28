@@ -33,6 +33,21 @@ class AppRouter {
       GoRoute(
         path: '/set-event',
         name: AppRoutesName.setEventScreen,
+        // builder: (context, state)
+        // {
+        //   if(state.extra !=null)
+        //   {
+        //     Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+        //
+        //     return SetEventScreen(
+        //       eventModelParam: extra["event"],
+        //     );
+        //   }
+        //   else
+        //   {
+        //     return  SetEventScreen();
+        //   }
+        // },
         pageBuilder: (context, state)
         {
 
@@ -48,8 +63,11 @@ class AppRouter {
             }
           else
             {
-              return const NoTransitionPage(
-                child: SetEventScreen(),
+              return  RouterTransitionFactory.getTransitionPage(
+                context: context,
+                state: state,
+                child: const SetEventScreen(),
+                type: Transition.scale, // fade|rotation|scale|size
               );
             }
 
@@ -59,4 +77,39 @@ class AppRouter {
 
     ],
   );
+}
+
+
+class RouterTransitionFactory {
+  static CustomTransitionPage getTransitionPage(
+      {required BuildContext context,
+        required GoRouterState state,
+        required Widget child,
+        required Transition type}) {
+    return CustomTransitionPage(
+        key: state.pageKey,
+        child: child,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          switch (type) {
+            case Transition.fade:
+              return FadeTransition(opacity: animation, child: child);
+            case Transition.rotation:
+              return RotationTransition(turns: animation, child: child);
+            case Transition.size:
+              return SizeTransition(sizeFactor: animation, child: child);
+            case Transition.scale:
+              return ScaleTransition(scale: animation, child: child);
+            default:
+              return FadeTransition(opacity: animation, child: child);
+          }
+        });
+  }
+}
+
+enum Transition
+{
+  fade ,
+  rotation,
+  size,
+  scale
 }
