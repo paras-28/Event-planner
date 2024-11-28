@@ -1,4 +1,5 @@
 import 'package:event_planner/config/test_config/test_config.dart';
+import 'package:event_planner/data/local_storage/repositories/home_repo/home_repo_local_impl.dart';
 import 'package:event_planner/data/repositories/home_repo/home_repo_impl.dart';
 import 'package:event_planner/domain/repositories/home_repo/home_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,11 @@ final dioProvider = Provider<dio.Dio>((ref) {
 
 final homeRepoProvider = Provider<HomeRepo>((ref) {
   return  HomeRepoImpl(ref.read(dioProvider));
+});
+
+
+final homeRepoLocalProvider = Provider<HomeRepo>((ref) {
+  return  HomeRepoLocalImpl();
 });
 
 dio.Dio  dioObjectRecogniser(TestConfig? config)

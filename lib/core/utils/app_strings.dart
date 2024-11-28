@@ -12,3 +12,8 @@ class AppStrings
  static const String deleteSuccessfully = "Delete Successfully";
 }
 
+
+class AppDatabaseStrings
+{
+ static const String events = "events";
+}
