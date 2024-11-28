@@ -1,4 +1,6 @@
 import 'package:event_planner/config/test_config/test_config.dart';
+import 'package:event_planner/data/repositories/home_repo/home_repo_impl.dart';
+import 'package:event_planner/domain/repositories/home_repo/home_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:dio/dio.dart' as dio;
@@ -7,13 +9,18 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 
 
 
+
 final dioProvider = Provider<dio.Dio>((ref) {
   throw UnimplementedError();
 });
 
+final homeRepoProvider = Provider<HomeRepo>((ref) {
+  return  HomeRepoImpl(ref.read(dioProvider));
+});
 
 dio.Dio  dioObjectRecogniser(TestConfig? config)
 {
+
   if(config == TestConfig.happyPathWithStatus200)
   {
     /// For testing purpose
@@ -85,12 +92,15 @@ dio.Dio  dioObjectRecogniser(TestConfig? config)
     dio.Dio  dioInst = dio.Dio();
     dioInst.options =
         dio.BaseOptions(
-            baseUrl: "https://api.restful-api.dev",
-            // baseUrl: "https://jsonplaceholder.typicode.com",
-            connectTimeout: const Duration(seconds: 6),
-            sendTimeout: const Duration(seconds: 6)
+            baseUrl: "https://67484d675801f51535903e81.mockapi.io/paras",
+            headers: {'content-type':'application/json'}
+            // connectTimeout: const Duration(seconds: 10),
+            // sendTimeout: const Duration(seconds: 10)
         );
 
     return dioInst;
   }
+
 }
+
+

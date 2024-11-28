@@ -13,7 +13,6 @@ class HomeRepoImpl implements HomeRepo
 
   HomeRepoImpl(this.dioInst);
 
-
   @override
   Future<EventModel> addEvent({required EventModel model}) {
     // TODO: implement addEvent
@@ -34,7 +33,7 @@ class HomeRepoImpl implements HomeRepo
     try {
       debuggerAdvance(tag: 'Api is calling', value: '');
       var response = await DioClient(dioInst)
-          .get(url: '/todos', uniqueKey: "fetchAllEvents");
+          .get(url: ApiEndPoints.event, uniqueKey: "fetchAllEvents",);
       List? list = response.data as List?;
       if (isListExist(list)) {
         return List<EventModel>.from(
